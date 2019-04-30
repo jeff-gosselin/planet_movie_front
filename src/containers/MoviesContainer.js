@@ -83,7 +83,7 @@ class MoviesContainer extends React.Component {
 
         <Search filterMovies={this.filterMovies} searchTerm={this.state.searchTerm}/>
 
-        <div uk-height-match="true" className="flexify" id="right-col">
+        <div className="flexify" id="right-col">
         <Switch>
           <Route path="/movies/popular" render={() => this.formatMovieCards(this.state.popularMovies)} />
           <Route path="/movies/top-rated" render={() => this.formatMovieCards(this.state.topRatedMovies)} />

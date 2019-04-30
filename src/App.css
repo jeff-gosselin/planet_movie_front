@@ -1,6 +1,6 @@
 
 
-@media (min-width: 600px) {
+@media (min-width: 720px) {
 	.flexify {
 		display: flex;
 		flex-wrap: wrap;
@@ -13,7 +13,7 @@
 	}
 }
 
-@media (min-width: 750px) {
+@media (min-width: 770px) {
 	.flexify {
 		display: flex;
 		flex-wrap: wrap;
@@ -26,7 +26,7 @@
 	}
 }
 
-@media (min-width: 1280px) {
+@media (min-width: 1274px) {
 	.flexify {
 		display: flex;
 		flex-wrap: wrap;
@@ -43,7 +43,7 @@
 	.flexify {
 		display: flex;
 		flex-wrap: wrap;
-		justify-content:space-between;
+		justify-content:center;
 	}
 
 	.flex-child {
@@ -52,6 +52,31 @@
 	}
 }
 
+@media (min-width: 2270px) {
+	.flexify {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content:center;
+	}
+
+	.flex-child {
+		flex: 1;
+		flex-basis: 20%;
+	}
+}
+
+@media (min-width: 2720px) {
+	.flexify {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content:center;
+	}
+
+	.flex-child {
+		flex: 1;
+		flex-basis: 16.66%;
+	}
+}
 
 .App {
   text-align: center;
@@ -108,12 +133,30 @@ button:focus {outline:0;}
   margin-left: 260px;
 }
 
+.title {
+	position: absolute;
+}
+
 .release-date {
 	color: #ddd;
 }
 
+.rel {
+	position: relative;
+}
+
+
 .c {
-	background-color: rgba(0,160,200,0.9);
+	background-color: rgba(0,160,200,0);
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	opacity: 0;
+}
+
+.c:hover {
+	background-color: rgba(0,160,200,0.8);
+	opacity: 1;
 }
 
 .white-text {
