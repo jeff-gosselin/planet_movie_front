@@ -10,7 +10,7 @@ const MovieCard = ({movie, showSingleMovie}) => {
   const {title, vote_average, overview, release_date, poster_path, backdrop_path, ref_code} = movie
   return (
     <div className={`flex-child`}>
-      <div className="">
+      <div>
 
 			<div className="uk-inline uk-visible-toggle">
 					<img data-src={`http://image.tmdb.org/t/p/w500/${poster_path}`} alt=""  uk-img="true"/>

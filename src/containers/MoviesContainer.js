@@ -26,7 +26,8 @@ class MoviesContainer extends React.Component {
     fetch(baseURL, {
       method: "GET",
       headers: {
-        Authorization: `Bearer ${localStorage.token}`
+        "content-type": "application/json",
+        accepts: "application/json"
       }
     })
     .then(res => res.json())

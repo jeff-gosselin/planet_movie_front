@@ -22,27 +22,29 @@ class App extends Component {
   }
 
   componentDidMount = () => {
-    let token = localStorage.token;
-    fetch("http://localhost:3000/api/v1/profile", {
-      method: "GET",
-      headers: {
-        "content-type": "application/json",
-        accepts: "application/json",
-        Authorization: `Bearer ${token}`
-      }
-    })
-      .then(resp => resp.json())
-      .then(result => console.log("fetch", result));
+    console.log("Mounted");
+    
+    // let token = localStorage.token;
+    // fetch("http://localhost:3000/api/v1/profile", {
+    //   method: "GET",
+    //   headers: {
+    //     "content-type": "application/json",
+    //     accepts: "application/json",
+    //     Authorization: `Bearer ${token}`
+    //   }
+    // })
+    //   .then(resp => resp.json())
+    //   .then(result => console.log("fetch", result));
 
-			// Remove at a later time: duplicate fetch
-			fetch(baseURL, {
-	      method: "GET",
-	      headers: {
-	        Authorization: `Bearer ${localStorage.token}`
-	      }
-	    })
-	    .then(res => res.json())
-	    .then(data => this.setState({movies: data}))
+		// 	// Remove at a later time: duplicate fetch
+		// 	fetch(baseURL, {
+	  //     method: "GET",
+	  //     headers: {
+	  //       Authorization: `Bearer ${localStorage.token}`
+	  //     }
+	  //   })
+	  //   .then(res => res.json())
+	  //   .then(data => this.setState({movies: data}))
 
   }
 
