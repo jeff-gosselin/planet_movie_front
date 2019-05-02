@@ -6,18 +6,26 @@ var moment = require('moment');
 
 class ShowContainer extends React.Component {
 
-
+	shouldComponentUpdate = () => {
+		if (this.props.movie) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 
 	render() {
 		const {ref_code, title, vote_average, overview, release_date, poster_path, backdrop_path, rental_price, purchase_price} = this.props.movie
 		console.log(this.props.movie.id);
 		return (
 			<div>
+				
 				<div className="ol"></div>
 				<img className="bkg" src={`http://image.tmdb.org/t/p/w500/${backdrop_path}`} />
-        <Search className="z"/>
+        
 				<div className="content">
-        	<h1 className="space-left">{title}</h1>
+					{/* <img className="show-img" src={`http://image.tmdb.org/t/p/w500/${backdrop_path}`} /> */}
+        			<h1 className="space-left">{title}</h1>
 					<h4 className="space-left">Released ({moment(release_date).format("YYYY")}) | Fan Score: {vote_average}</h4>
 					<p className="space-left overview">{overview}</p>
 					<div className="space-left flexify-btns">

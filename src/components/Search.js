@@ -1,7 +1,11 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 
+
+
 const Search = (props) => {
+  console.log("Search Props: ", props);
+  
   return (
     <nav className="uk-navbar-container z" data-uk-navbar>
 
@@ -31,10 +35,19 @@ const Search = (props) => {
       </div>
 
     <div className="nav-overlay uk-navbar-left">
-       <ul className="uk-navbar-nav">
-           <li className="uk-active"><Link to="/login">Login</Link></li>
-           <li><Link to="/signup">Sign Up</Link></li>
-       </ul>
+       
+       {props.user.id ? 
+        <ul className="uk-navbar-nav">
+          <li className="uk-active pointer" onClick={() => props.logout()}>Log Out</li> 
+        </ul>
+        :
+        <ul className="uk-navbar-nav">
+          <li className="uk-active pointer"><Link to="/login">Log In</Link></li>
+          <li className="pointer"><Link to="/signup">Sign Up</Link></li>
+        </ul>
+        }
+           
+       
 
    </div>
 

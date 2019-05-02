@@ -63,13 +63,6 @@ class MoviesContainer extends React.Component {
     })
   }
 
-	showSingleMovie = (e, movie, ref_code) => {
-
-		this.setState({
-			singleMovie: movie,
-			moviePath: ref_code
-		})
-	}
 
   filterMovies = event => {
     this.setState({
@@ -78,10 +71,13 @@ class MoviesContainer extends React.Component {
   }
 
   render() {
+    console.log("this.props.logout", this.props.logout);
+    
+    
     return (
       <div>
 
-        <Search filterMovies={this.filterMovies} searchTerm={this.state.searchTerm}/>
+        <Search filterMovies={this.filterMovies} searchTerm={this.state.searchTerm} user={this.props.user} logout={this.props.logout} />
 
         <div className="flexify" id="right-col">
         <Switch>
@@ -89,7 +85,7 @@ class MoviesContainer extends React.Component {
           <Route path="/movies/top-rated" render={() => this.formatMovieCards(this.state.topRatedMovies)} />
           <Route path="/movies/now-playing" render={() => this.formatMovieCards(this.state.nowPlayingMovies)} />
           <Route path="/movies/upcoming" render={() => this.formatMovieCards(this.state.upcomingMovies)} />
-          <Route path="/movies" render={() => this.formatMovieCards(this.state.movies)} />
+          
           <Route
           path="/movies/:ref_code"
           render={routerProps => {
@@ -102,6 +98,7 @@ class MoviesContainer extends React.Component {
             return <ShowContainer movie={movie} rentMovie={this.props.rentMovie} buyMovie={this.props.buyMovie} user={this.props.user}/>;
           }}
           />
+          <Route path="/movies" render={() => this.formatMovieCards(this.state.movies)} />
         </Switch>
         </div>
       </div>

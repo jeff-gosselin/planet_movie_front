@@ -23,18 +23,20 @@ class App extends Component {
 
   componentDidMount = () => {
     console.log("Mounted");
+    if (localStorage.token) {
+      let token = localStorage.token;
+      fetch("http://localhost:3000/api/v1/profile", {
+        method: "GET",
+        headers: {
+          "content-type": "application/json",
+          accepts: "application/json",
+          Authorization: `Bearer ${token}`
+        }
+      })
+        .then(resp => resp.json())
+        .then(data => this.setState({ user: data.user }));
+    }
     
-    // let token = localStorage.token;
-    // fetch("http://localhost:3000/api/v1/profile", {
-    //   method: "GET",
-    //   headers: {
-    //     "content-type": "application/json",
-    //     accepts: "application/json",
-    //     Authorization: `Bearer ${token}`
-    //   }
-    // })
-    //   .then(resp => resp.json())
-    //   .then(result => console.log("fetch", result));
 
 		// 	// Remove at a later time: duplicate fetch
 		// 	fetch(baseURL, {
@@ -136,8 +138,15 @@ class App extends Component {
       });
   };
 
-	render() {
 
+  logout = () => {
+    console.log("LOGOUT!");
+    localStorage.removeItem('token');
+    this.setState({user: {}});
+  }
+
+	render() {
+    console.log("The user is: ", this.state.user);
     return (
       <div>
           <Navbar user={this.state.user} rentals={this.state.rentals} buys={this.state.buys} allMovies={this.state.movies}/>
@@ -149,11 +158,11 @@ class App extends Component {
             <Route
             path="/signup"
             render={  () => <Login submitHandler={this.signupSubmitHandler} name="Sign Up"/>  }/>
-          	<Route path="/movies/popular" render={() => <MoviesContainer movies={this.state.popularMovies} getMovie={this.getMovie} user={this.state.user}/>} />
-						<Route path="/movies/top-rated" render={() => <MoviesContainer movies={this.state.topRatedMovies} getMovie={this.getMovie} user={this.state.user}/>} />
-						<Route path="/movies/now-playing" render={() => <MoviesContainer movies={this.state.nowPlayingMovies} getMovie={this.getMovie} user={this.state.user}/>} />
-						<Route path="/movies/upcoming" render={() => <MoviesContainer movies={this.state.upcomingMovies} getMovie={this.getMovie} user={this.state.user}/>} />
-						<Route path="/movies" render={() => <MoviesContainer movies={this.state.movies} getMovie={this.getMovie} user={this.state.user}/>} />
+          	<Route path="/movies/popular" render={() => <MoviesContainer movies={this.state.popularMovies} getMovie={this.getMovie} user={this.state.user} logout={this.logout}/>} />
+						<Route path="/movies/top-rated" render={() => <MoviesContainer movies={this.state.topRatedMovies} getMovie={this.getMovie} user={this.state.user} logout={this.logout}/>} />
+						<Route path="/movies/now-playing" render={() => <MoviesContainer movies={this.state.nowPlayingMovies} getMovie={this.getMovie} user={this.state.user} logout={this.logout}/>} />
+						<Route path="/movies/upcoming" render={() => <MoviesContainer movies={this.state.upcomingMovies} getMovie={this.getMovie} user={this.state.user} logout={this.logout}/>} />
+						<Route path="/movies" render={() => <MoviesContainer movies={this.state.movies} getMovie={this.getMovie} user={this.state.user} logout={this.logout}/>} />
 					</Switch>
       </div>
     )

@@ -1,5 +1,6 @@
 import React from "react";
 import {Link} from 'react-router-dom';
+import {Redirect} from 'react-router-dom';
 
 class Login extends React.Component {
   state = {
@@ -18,6 +19,9 @@ class Login extends React.Component {
     this.props.submitHandler(this.state);
   };
   render() {
+    if(localStorage.token) {
+      return <Redirect to="/movies/popular"/>
+    }
     const {name} = this.props
     return (
       <div id="right-col" className="uk-tile-muted uk-padding-large uk-height-viewport login-box">
