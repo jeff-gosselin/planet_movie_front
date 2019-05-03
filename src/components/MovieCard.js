@@ -7,8 +7,10 @@ import MovieInterface from './MovieInterface';
 
 var moment = require('moment');
 
-const MovieCard = ({movie, showSingleMovie}) => {
+const MovieCard = ({movie, showSingleMovie, addMovieAsSeen, user}) => {
 	const {title, vote_average, overview, release_date, poster_path, backdrop_path, ref_code} = movie;
+	console.log("MovieCard user: ", user.id);
+	
 	
   return (
     <div className="flex-child">
@@ -32,7 +34,7 @@ const MovieCard = ({movie, showSingleMovie}) => {
 							</div>
 
 						</div>
-						<MovieInterface />
+						<MovieInterface addMovieAsSeen={addMovieAsSeen} user={user} movie={movie} />
 					</div>
 					
 					

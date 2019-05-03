@@ -50,16 +50,24 @@ class App extends Component {
 
   }
 
-	rentMovie = (e, id, user) => {
+	addMovieAsSeen = (e, user_id, movie_id, status) => {
+
+    console.log("user_id:", user_id);
+    console.log("movie_id:", movie_id);
+    console.log("status:", status);
+    
+
+
 
 		let token = localStorage.token;
 
-		fetch("http://localhost:3000/api/v1/rentals", {
+		fetch("http://localhost:3000/api/v1/listings", {
       method: "POST",
-      body: JSON.stringify({rental: {
-				user_id: user.id,
-				movie_id: id
-			}}),
+      body: JSON.stringify({
+				user_id,
+        movie_id,
+        status
+			}),
       headers: {
         "content-type": "application/json",
         accepts: "application/json",
@@ -67,15 +75,10 @@ class App extends Component {
       }
     })
       .then(resp => resp.json())
-			.then(rental => {
-				let myRental = this.state.movies.filter(movie => movie.id === rental.movie_id)
-				console.log("Rrrrentals", myRental);
-				this.setState({
-					rentals: [myRental, ...this.state.rentals]
-				}, () => console.log("My rental state:",this.state.rentals)) ;
-
-			})
+			.then(data => console.log("fetched data for seen movies: ", data))
 	}
+
+
 
 	buyMovie = (e, id, user) => {
 		console.log("buying");
@@ -158,11 +161,11 @@ class App extends Component {
             <Route
             path="/signup"
             render={  () => <Login submitHandler={this.signupSubmitHandler} name="Sign Up"/>  }/>
-          	<Route path="/movies/popular" render={() => <MoviesContainer movies={this.state.popularMovies} getMovie={this.getMovie} user={this.state.user} logout={this.logout}/>} />
-						<Route path="/movies/top-rated" render={() => <MoviesContainer movies={this.state.topRatedMovies} getMovie={this.getMovie} user={this.state.user} logout={this.logout}/>} />
-						<Route path="/movies/now-playing" render={() => <MoviesContainer movies={this.state.nowPlayingMovies} getMovie={this.getMovie} user={this.state.user} logout={this.logout}/>} />
-						<Route path="/movies/upcoming" render={() => <MoviesContainer movies={this.state.upcomingMovies} getMovie={this.getMovie} user={this.state.user} logout={this.logout}/>} />
-						<Route path="/movies" render={() => <MoviesContainer movies={this.state.movies} getMovie={this.getMovie} user={this.state.user} logout={this.logout}/>} />
+          	<Route path="/movies/popular" render={() => <MoviesContainer movies={this.state.popularMovies} addMovieAsSeen={this.addMovieAsSeen} user={this.state.user} logout={this.logout}/>} />
+						<Route path="/movies/top-rated" render={() => <MoviesContainer movies={this.state.topRatedMovies} addMovieAsSeen={this.addMovieAsSeen} user={this.state.user} logout={this.logout}/>} />
+						<Route path="/movies/now-playing" render={() => <MoviesContainer movies={this.state.nowPlayingMovies} addMovieAsSeen={this.addMovieAsSeen} user={this.state.user} logout={this.logout}/>} />
+						<Route path="/movies/upcoming" render={() => <MoviesContainer movies={this.state.upcomingMovies} addMovieAsSeen={this.addMovieAsSeen} user={this.state.user} logout={this.logout}/>} />
+						<Route path="/movies" render={() => <MoviesContainer movies={this.state.movies} addMovieAsSeen={this.addMovieAsSeen} user={this.state.user} logout={this.logout}/>} />
 					</Switch>
       </div>
     )

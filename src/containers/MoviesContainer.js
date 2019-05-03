@@ -59,7 +59,7 @@ class MoviesContainer extends React.Component {
     let filteredMovies = movies.filter(movie=>movie.title.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
 
     return filteredMovies.map(movie => {
-      return <MovieCard movie={movie} key={movie.id} showSingleMovie={this.showSingleMovie} />
+      return <MovieCard user={this.props.user} addMovieAsSeen={this.props.addMovieAsSeen} movie={movie} key={movie.id} showSingleMovie={this.showSingleMovie} />
     })
   }
 
