@@ -43,8 +43,8 @@ class MoviesContainer extends React.Component {
         topRatedMovies,
         upcomingMovies,
         nowPlayingMovies
-      }, () => console.log("This is the state", this.state)
-      )
+      })
+      
     })
   }
 
@@ -59,7 +59,7 @@ class MoviesContainer extends React.Component {
     let filteredMovies = movies.filter(movie=>movie.title.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
 
     return filteredMovies.map(movie => {
-      return <MovieCard user={this.props.user} addMovieAsSeen={this.props.addMovieAsSeen} movie={movie} key={movie.id} showSingleMovie={this.showSingleMovie} />
+      return <MovieCard user={this.props.user} seenMovies={this.props.seen} addMovieAsSeen={this.props.addMovieAsSeen} movie={movie} key={movie.id} showSingleMovie={this.showSingleMovie} />
     })
   }
 
@@ -67,7 +67,7 @@ class MoviesContainer extends React.Component {
   filterMovies = event => {
     this.setState({
       searchTerm: event.target.value
-    }, console.log("The search bar is typing", this.state.searchTerm))
+    })
   }
 
   render() {
@@ -90,10 +90,7 @@ class MoviesContainer extends React.Component {
           render={routerProps => {
             let ref_code = routerProps.match.params.ref_code;
             let movie = this.state.movies.find(movie => movie.ref_code == parseInt(ref_code))
-            console.log("this is the movie:", movie);
-            console.log("these are routerProps", routerProps);
-            console.log("this is the ref code:", ref_code);
-            console.log("these are all the movies in state:", this.state.movies)
+            
             return <ShowContainer movie={movie} rentMovie={this.props.rentMovie} buyMovie={this.props.buyMovie} user={this.props.user}/>;
           }}
           />

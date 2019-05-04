@@ -4,7 +4,7 @@ import '../css/addedMovie.css';
 class AddedMovie extends Component {
   render() {
       const {poster_path, title} = this.props.movie;
-      console.log("AddedMovie Comp: ", poster_path);
+      
       
     return (
       <div className="added-movies">

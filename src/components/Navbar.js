@@ -4,31 +4,21 @@ import './MyMovie';
 import AddedMovie from './AddedMovie';
 
 class Navbar extends Component {
-  state = {
-    seen: []
-  }
+  
+  
   
 
 
   render() {
     
-    const {user} = this.props;
-    let seen = null;
+    const {user, seen} = this.props;
+    
+    
+    let seenMovies = null;
 
-    if (Object.entries(user).length === 0 && user.constructor === Object) { 
-      console.log("Nothing to do!");
+    if (seen.length !== 0) { 
       
-    } else {
-      
-      if (user.views.length > 0) {
-        console.log("user.views.length", user.views.length);
-        
-        seen = user.views.map(view => <AddedMovie key={view.movie.id} movie={view.movie}/>)
-      }
-      
-      
-      console.log("Seen: ", user.views);
-      
+      seenMovies = seen.map(movie => <AddedMovie key={movie.id} movie={movie}/>)
     }
 
     return (
@@ -63,7 +53,7 @@ class Navbar extends Component {
                 
                 <li className="uk-nav-header">Seen</li>
                 <li>
-                  {seen}
+                  {seenMovies}
                 </li>
   
   
@@ -85,4 +75,12 @@ class Navbar extends Component {
 // <li><a><span className="uk-margin-small-right" uk-icon="icon: trash"></span> Item</a></li>
 // <a className="uk-navbar-item uk-logo"> <span className="uk-margin-small-right" uk-icon="icon: play-circle"></span>Planet Movie</a>
 // const Navbar = ({sectionClickHandler, user, rentals, buys, allMovies})
+
+// if (Object.entries(user).length !== 0 && user.constructor !== Object) { 
+//   console.log("Do Nothing!");
+  
+// }
+
+
+
 export default Navbar;

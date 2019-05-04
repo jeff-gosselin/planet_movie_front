@@ -17,12 +17,12 @@ class App extends Component {
     upcomingMovies: [],
     nowPlayingMovies: [],
     user: {},
-		rentals: [],
+		seen: [],
 		buys: []
   }
 
   componentDidMount = () => {
-    console.log("Mounted");
+    
     if (localStorage.token) {
       let token = localStorage.token;
       fetch("http://localhost:3000/api/v1/profile", {
@@ -34,7 +34,10 @@ class App extends Component {
         }
       })
         .then(resp => resp.json())
-        .then(data => this.setState({ user: data.user }));
+        .then(data => {
+          data.user.views.map(view => this.setState({ seen: [view.movie, ...this.state.seen]}))
+          this.setState({ user: data.user})
+        })
     }
     
     
@@ -51,7 +54,7 @@ class App extends Component {
 
   }
 
-	addMovieAsSeen = (e, user_id, movie_id) => {
+	addMovieAsSeen = (user_id, movie_id) => {
 
 		let token = localStorage.token;
 
@@ -68,13 +71,15 @@ class App extends Component {
       }
     })
       .then(resp => resp.json())
-			.then(data => console.log("fetched data for seen movies: ", data.movie))
+			.then(data => {
+        this.setState({seen: [data.movie, ...this.state.seen]})
+      })
 	}
 
 
 
 	buyMovie = (e, id, user) => {
-		console.log("buying");
+		
 		let token = localStorage.token;
 
 		fetch("http://localhost:3000/api/v1/purchases", {
@@ -93,7 +98,7 @@ class App extends Component {
 			.then(buy => {
 				this.setState({
 					buys: [buy.movie, ...this.state.buys]
-				}, () => console.log("My buy state:",this.state.buys)) ;
+				}) ;
 
 			})
 	}
@@ -110,7 +115,8 @@ class App extends Component {
       .then(resp => resp.json())
       .then(data => {
         localStorage.setItem("token", data.jwt);
-        this.setState({ user: data.user }, () => console.log(this.state));
+        this.setState({ user: data.user });
+        data.user.views.map(view => this.setState({ seen: [view.movie, ...this.state.seen]}))
       });
   };
 
@@ -130,6 +136,7 @@ class App extends Component {
         } else {
           localStorage.setItem("token", user.jwt);
           this.setState({ user: user.user }, () => console.log("User is logged in from loginSubmitHandler!", user));
+          user.user.views.map(view => this.setState({ seen: [view.movie, ...this.state.seen]}));
         }
       });
   };
@@ -138,14 +145,14 @@ class App extends Component {
   logout = () => {
     console.log("LOGOUT!");
     localStorage.removeItem('token');
-    this.setState({user: {}});
+    this.setState({user: {}, seen: []});
   }
 
 	render() {
-    console.log("The user is: ", this.state.user);
+    
     return (
       <div>
-          <Navbar user={this.state.user} rentals={this.state.rentals} buys={this.state.buys} allMovies={this.state.movies}/>
+          <Navbar user={this.state.user} seen={this.state.seen} buys={this.state.buys} allMovies={this.state.movies}/>
 					<Switch>
             <Route
               path="/login"
@@ -154,11 +161,11 @@ class App extends Component {
             <Route
             path="/signup"
             render={  () => <Login submitHandler={this.signupSubmitHandler} name="Sign Up"/>  }/>
-          	<Route path="/movies/popular" render={() => <MoviesContainer movies={this.state.popularMovies} addMovieAsSeen={this.addMovieAsSeen} user={this.state.user} logout={this.logout}/>} />
-						<Route path="/movies/top-rated" render={() => <MoviesContainer movies={this.state.topRatedMovies} addMovieAsSeen={this.addMovieAsSeen} user={this.state.user} logout={this.logout}/>} />
-						<Route path="/movies/now-playing" render={() => <MoviesContainer movies={this.state.nowPlayingMovies} addMovieAsSeen={this.addMovieAsSeen} user={this.state.user} logout={this.logout}/>} />
-						<Route path="/movies/upcoming" render={() => <MoviesContainer movies={this.state.upcomingMovies} addMovieAsSeen={this.addMovieAsSeen} user={this.state.user} logout={this.logout}/>} />
-						<Route path="/movies" render={() => <MoviesContainer movies={this.state.movies} addMovieAsSeen={this.addMovieAsSeen} user={this.state.user} logout={this.logout}/>} />
+          	<Route path="/movies/popular" render={() => <MoviesContainer movies={this.state.popularMovies} addMovieAsSeen={this.addMovieAsSeen} seen={this.state.seen} user={this.state.user} logout={this.logout}/>} />
+						<Route path="/movies/top-rated" render={() => <MoviesContainer movies={this.state.topRatedMovies} addMovieAsSeen={this.addMovieAsSeen} seen={this.state.seen} user={this.state.user} logout={this.logout}/>} />
+						<Route path="/movies/now-playing" render={() => <MoviesContainer movies={this.state.nowPlayingMovies} addMovieAsSeen={this.addMovieAsSeen} seen={this.state.seen} user={this.state.user} logout={this.logout}/>} />
+						<Route path="/movies/upcoming" render={() => <MoviesContainer movies={this.state.upcomingMovies} addMovieAsSeen={this.addMovieAsSeen} seen={this.state.seen} user={this.state.user} logout={this.logout}/>} />
+						<Route path="/movies" render={() => <MoviesContainer movies={this.state.movies} addMovieAsSeen={this.addMovieAsSeen} seen={this.state.seen} user={this.state.user} logout={this.logout}/>} />
 					</Switch>
       </div>
     )

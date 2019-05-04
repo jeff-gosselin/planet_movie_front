@@ -71,3 +71,7 @@
     transition-duration: .25s;
     cursor: pointer;
 }
+
+.seen-message {
+    margin-top: 29%;
+}
