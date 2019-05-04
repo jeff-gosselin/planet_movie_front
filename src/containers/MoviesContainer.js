@@ -71,7 +71,6 @@ class MoviesContainer extends React.Component {
   }
 
   render() {
-    console.log("this.props.logout", this.props.logout);
     
     
     return (

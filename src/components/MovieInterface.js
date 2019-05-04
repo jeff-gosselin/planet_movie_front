@@ -14,7 +14,7 @@ class MovieInterface extends Component {
     render() {
         let user_id = this.props.user.id;
         let movie_id = this.props.movie.id;
-        console.log("MovieInterface: ", this.props.movie.id);
+        
         
         
         return (
@@ -23,7 +23,7 @@ class MovieInterface extends Component {
                 <div className="interface">
 
                     <div className="seen">
-                        <div onClick={(e) => this.props.addMovieAsSeen(e, user_id, movie_id, "seen")} className="rollover" alt="Seen This">
+                        <div onClick={(e) => this.props.addMovieAsSeen(e, user_id, movie_id)} className="rollover" alt="Seen This">
                             <IconContext.Provider value={{ style: { width: '60%', color: 'white', paddingTop: '16.5%'} }}>
                                 <FaEye/>
                             </IconContext.Provider> 

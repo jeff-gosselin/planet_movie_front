@@ -8,8 +8,8 @@ import MovieInterface from './MovieInterface';
 var moment = require('moment');
 
 const MovieCard = ({movie, showSingleMovie, addMovieAsSeen, user}) => {
-	const {title, vote_average, overview, release_date, poster_path, backdrop_path, ref_code} = movie;
-	console.log("MovieCard user: ", user.id);
+	const {title, vote_average, overview, release_date, poster_path, ref_code} = movie;
+	
 	
 	
   return (

@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
 
 
 const Search = (props) => {
-  console.log("Search Props: ", props);
+
   
   return (
     <nav className="uk-navbar-container z" data-uk-navbar>

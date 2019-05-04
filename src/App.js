@@ -37,7 +37,8 @@ class App extends Component {
         .then(data => this.setState({ user: data.user }));
     }
     
-
+    
+    
 		// 	// Remove at a later time: duplicate fetch
 		// 	fetch(baseURL, {
 	  //     method: "GET",
@@ -50,23 +51,15 @@ class App extends Component {
 
   }
 
-	addMovieAsSeen = (e, user_id, movie_id, status) => {
-
-    console.log("user_id:", user_id);
-    console.log("movie_id:", movie_id);
-    console.log("status:", status);
-    
-
-
+	addMovieAsSeen = (e, user_id, movie_id) => {
 
 		let token = localStorage.token;
 
-		fetch("http://localhost:3000/api/v1/listings", {
+		fetch("http://localhost:3000/api/v1/views", {
       method: "POST",
       body: JSON.stringify({
 				user_id,
-        movie_id,
-        status
+        movie_id
 			}),
       headers: {
         "content-type": "application/json",
@@ -75,7 +68,7 @@ class App extends Component {
       }
     })
       .then(resp => resp.json())
-			.then(data => console.log("fetched data for seen movies: ", data))
+			.then(data => console.log("fetched data for seen movies: ", data.movie))
 	}
 
 
