@@ -11,14 +11,17 @@ class Navbar extends Component {
 
   render() {
     
-    const {user, seen} = this.props;
+    const {user, seen, interests} = this.props;
     
     
     let seenMovies = null;
-
+    let mustSeeMovies = null;
     if (seen.length !== 0) { 
-      
       seenMovies = seen.map(movie => <AddedMovie key={movie.id} movie={movie}/>)
+    }
+
+    if (interests.length !== 0) { 
+      mustSeeMovies = interests.map(movie => <AddedMovie key={movie.id} movie={movie}/>)
     }
 
     return (
@@ -50,7 +53,9 @@ class Navbar extends Component {
                     </ul>
                 </li>
                 <li className="uk-nav-header">Must See</li>
-                
+                <li>
+                  {mustSeeMovies}
+                </li>
                 <li className="uk-nav-header">Seen</li>
                 <li>
                   {seenMovies}

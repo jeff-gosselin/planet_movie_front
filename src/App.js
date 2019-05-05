@@ -18,7 +18,7 @@ class App extends Component {
     nowPlayingMovies: [],
     user: {},
 		seen: [],
-		buys: []
+		interests: []
   }
 
   componentDidMount = () => {
@@ -36,7 +36,8 @@ class App extends Component {
         .then(resp => resp.json())
         .then(data => {
           data.user.views.map(view => this.setState({ seen: [view.movie, ...this.state.seen]}))
-          this.setState({ user: data.user})
+          data.user.interests.map(interest => this.setState({ interests: [interest.movie, ...this.state.interests]}))
+          this.setState({ user: data.user}, () => console.log("Does this user have interests?", data.user))
         })
     }
     
@@ -73,6 +74,28 @@ class App extends Component {
       .then(resp => resp.json())
 			.then(data => {
         this.setState({seen: [data.movie, ...this.state.seen]})
+      })
+  }
+  
+  addMovieAsMustSee = (user_id, movie_id) => {
+
+		let token = localStorage.token;
+
+		fetch("http://localhost:3000/api/v1/interests", {
+      method: "POST",
+      body: JSON.stringify({
+				user_id,
+        movie_id
+			}),
+      headers: {
+        "content-type": "application/json",
+        accepts: "application/json",
+				Authorization: `Bearer ${token}`
+      }
+    })
+      .then(resp => resp.json())
+			.then(data => {
+        this.setState({interests: [data.movie, ...this.state.interests]}, () => console.log("Are we getting data?", data))
       })
 	}
 
@@ -145,14 +168,14 @@ class App extends Component {
   logout = () => {
     console.log("LOGOUT!");
     localStorage.removeItem('token');
-    this.setState({user: {}, seen: []});
+    this.setState({user: {}, seen: [], interests: []});
   }
 
 	render() {
     
     return (
       <div>
-          <Navbar user={this.state.user} seen={this.state.seen} buys={this.state.buys} allMovies={this.state.movies}/>
+          <Navbar user={this.state.user} seen={this.state.seen} interests={this.state.interests} allMovies={this.state.movies}/>
 					<Switch>
             <Route
               path="/login"
@@ -161,11 +184,11 @@ class App extends Component {
             <Route
             path="/signup"
             render={  () => <Login submitHandler={this.signupSubmitHandler} name="Sign Up"/>  }/>
-          	<Route path="/movies/popular" render={() => <MoviesContainer movies={this.state.popularMovies} addMovieAsSeen={this.addMovieAsSeen} seen={this.state.seen} user={this.state.user} logout={this.logout}/>} />
-						<Route path="/movies/top-rated" render={() => <MoviesContainer movies={this.state.topRatedMovies} addMovieAsSeen={this.addMovieAsSeen} seen={this.state.seen} user={this.state.user} logout={this.logout}/>} />
-						<Route path="/movies/now-playing" render={() => <MoviesContainer movies={this.state.nowPlayingMovies} addMovieAsSeen={this.addMovieAsSeen} seen={this.state.seen} user={this.state.user} logout={this.logout}/>} />
-						<Route path="/movies/upcoming" render={() => <MoviesContainer movies={this.state.upcomingMovies} addMovieAsSeen={this.addMovieAsSeen} seen={this.state.seen} user={this.state.user} logout={this.logout}/>} />
-						<Route path="/movies" render={() => <MoviesContainer movies={this.state.movies} addMovieAsSeen={this.addMovieAsSeen} seen={this.state.seen} user={this.state.user} logout={this.logout}/>} />
+          	<Route path="/movies/popular" render={() => <MoviesContainer movies={this.state.popularMovies} addMovieAsMustSee={this.addMovieAsMustSee} addMovieAsSeen={this.addMovieAsSeen} mustSee={this.state.interests} seen={this.state.seen} user={this.state.user} logout={this.logout}/>} />
+						<Route path="/movies/top-rated" render={() => <MoviesContainer movies={this.state.topRatedMovies} addMovieAsMustSee={this.addMovieAsMustSee} addMovieAsSeen={this.addMovieAsSeen} mustSee={this.state.interests} seen={this.state.seen} user={this.state.user} logout={this.logout}/>} />
+						<Route path="/movies/now-playing" render={() => <MoviesContainer movies={this.state.nowPlayingMovies} addMovieAsMustSee={this.addMovieAsMustSee} addMovieAsSeen={this.addMovieAsSeen} mustSee={this.state.interests} seen={this.state.seen} user={this.state.user} logout={this.logout}/>} />
+						<Route path="/movies/upcoming" render={() => <MoviesContainer movies={this.state.upcomingMovies} addMovieAsMustSee={this.addMovieAsMustSee} addMovieAsSeen={this.addMovieAsSeen} mustSee={this.state.interests} seen={this.state.seen} user={this.state.user} logout={this.logout}/>} />
+						<Route path="/movies" render={() => <MoviesContainer movies={this.state.movies} addMovieAsMustSee={this.addMovieAsMustSee} addMovieAsSeen={this.addMovieAsSeen} mustSee={this.state.interests} seen={this.state.seen} user={this.state.user} logout={this.logout}/>} />
 					</Switch>
       </div>
     )

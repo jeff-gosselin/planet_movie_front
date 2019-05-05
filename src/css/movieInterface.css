@@ -75,3 +75,7 @@
 .seen-message {
     margin-top: 29%;
 }
+
+.deactivated {
+    opacity: .05;
+}

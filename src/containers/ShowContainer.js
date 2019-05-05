@@ -1,6 +1,7 @@
 import React from 'react';
 import Search from '../components/Search';
 import '../ShowContainer.css'
+import { Link } from "react-router-dom";
 
 var moment = require('moment');
 
@@ -30,11 +31,9 @@ class ShowContainer extends React.Component {
 					<p className="space-left overview">{overview}</p>
 					<div className="space-left flexify-btns">
 						<div className="rent">
-							<button onClick={(e) => this.props.rentMovie(e, this.props.movie.id, this.props.user)} className="rent-buy-btn">{`Rent: $${rental_price}`}</button>
+							<Link to="/movies/popular" className="rent-buy-btn">Go Back</Link>
 						</div>
-						<div className="buy">
-							<button onClick={(e) => this.props.buyMovie(e, this.props.movie.id, this.props.user)} className="rent-buy-btn">{`Buy: $${purchase_price}`}</button>
-						</div>
+						
 					</div>
 				</div>
       </div>

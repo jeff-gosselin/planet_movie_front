@@ -7,9 +7,10 @@ import MovieInterface from './MovieInterface';
 
 var moment = require('moment');
 
-const MovieCard = ({movie, showSingleMovie, addMovieAsSeen, user, seenMovies}) => {
+const MovieCard = ({movie, showSingleMovie, addMovieAsSeen, addMovieAsMustSee, user, mustSeeMovies, seenMovies}) => {
 	const {title, vote_average, overview, release_date, poster_path, ref_code} = movie;
 	
+	console.log("mustSeeMovies", mustSeeMovies);
 	
 	
 	
@@ -36,7 +37,7 @@ const MovieCard = ({movie, showSingleMovie, addMovieAsSeen, user, seenMovies}) =
 							</div>
 
 						</div>
-						<MovieInterface addMovieAsSeen={addMovieAsSeen} seenMovies={seenMovies} user={user} movie={movie} />
+						<MovieInterface addMovieAsMustSee={addMovieAsMustSee} addMovieAsSeen={addMovieAsSeen} mustSeeMovies={mustSeeMovies} seenMovies={seenMovies} user={user} movie={movie} />
 					</div>
 					
 					
