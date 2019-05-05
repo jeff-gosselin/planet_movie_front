@@ -35,9 +35,9 @@ class App extends Component {
       })
         .then(resp => resp.json())
         .then(data => {
-          data.user.views.map(view => this.setState({ seen: [view.movie, ...this.state.seen]}))
-          data.user.interests.map(interest => this.setState({ interests: [interest.movie, ...this.state.interests]}))
-          this.setState({ user: data.user}, () => console.log("Does this user have interests?", data.user))
+          data.user.views.map(view => this.setState({ seen: [view.movie, ...this.state.seen]}));
+          data.user.interests.map(interest => this.setState({ interests: [interest.movie, ...this.state.interests]}));
+          this.setState({ user: data.user}, () => console.log("Does this user have interests?", data.user));
         })
     }
     
@@ -100,32 +100,6 @@ class App extends Component {
 	}
 
 
-
-	buyMovie = (e, id, user) => {
-		
-		let token = localStorage.token;
-
-		fetch("http://localhost:3000/api/v1/purchases", {
-      method: "POST",
-			body: JSON.stringify({purchase: {
-				user_id: user.id,
-				movie_id: id
-			}}),
-      headers: {
-        "content-type": "application/json",
-        accepts: "application/json",
-				Authorization: `Bearer ${token}`
-      }
-    })
-      .then(resp => resp.json())
-			.then(buy => {
-				this.setState({
-					buys: [buy.movie, ...this.state.buys]
-				}) ;
-
-			})
-	}
-
   signupSubmitHandler = userInfo => {
     fetch("http://localhost:3000/api/v1/users", {
       method: "POST",
@@ -139,7 +113,8 @@ class App extends Component {
       .then(data => {
         localStorage.setItem("token", data.jwt);
         this.setState({ user: data.user });
-        data.user.views.map(view => this.setState({ seen: [view.movie, ...this.state.seen]}))
+        data.user.views.map(view => this.setState({ seen: [view.movie, ...this.state.seen]}));
+        data.user.interests.map(interest => this.setState({ interests: [interest.movie, ...this.state.interests]}));
       });
   };
 
@@ -160,6 +135,8 @@ class App extends Component {
           localStorage.setItem("token", user.jwt);
           this.setState({ user: user.user }, () => console.log("User is logged in from loginSubmitHandler!", user));
           user.user.views.map(view => this.setState({ seen: [view.movie, ...this.state.seen]}));
+          user.user.interests.map(interest => this.setState({ interests: [interest.movie, ...this.state.interests]}));
+
         }
       });
   };
