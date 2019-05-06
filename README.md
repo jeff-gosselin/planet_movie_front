@@ -13,7 +13,7 @@ The goal of building this app was to learn more about connecting to a 3rd-party 
 * [React](https://reactjs.org/) - a javascript library used for the frontend development
 * [react-router](https://reacttraining.com/react-router/) - for navigating the site.
 * [react-icons](https://www.npmjs.com/package/react-icons) - for an icon or two
-* [Ruby on Rails](https://rubyonrails.org/) - used for the backend
+* [Ruby on Rails](https://rubyonrails.org/) - used for the backend (version 5.2.2)
 * [postgreSQL](https://www.postgresql.org/) - was the database used
 * [bcrypt](https://rubygems.org/gems/bcrypt/versions/3.1.12) - to hash user passwords for real auth
 * [JSON Web Token (JWT)](https://rubygems.org/gems/jwt/versions/1.5.4) - providing security for stored user login data
