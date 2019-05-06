@@ -17,8 +17,8 @@ The goal of building this app was to learn more about connecting to a 3rd-party 
 * [postgreSQL](https://www.postgresql.org/) - was the database used
 * [bcrypt](https://rubygems.org/gems/bcrypt/versions/3.1.12) - to hash user passwords for real auth
 * [JSON Web Token (JWT)](https://rubygems.org/gems/jwt/versions/1.5.4) - providing security for stored user login data
-* [The Movie Database API](https://developers.themoviedb.org/3/getting-started/introduction)
-
+* [The Movie Database API](https://developers.themoviedb.org/3/getting-started/introduction) - An API for movie data
+* [themoviedb-api](https://github.com/18Months/themoviedb-api) - provides a simple and intuitive interface for the Movie Database API making use of OpenStruct.
 
 
 [Backend repo](https://github.com/jeff-gosselin/planet_movie_back)
