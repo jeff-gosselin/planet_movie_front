@@ -6,7 +6,7 @@ A web application that not only supplies the user with info on blockbuster movie
 
 ## Purpose
 
-The goal of building this app was to learn more about connecting to a 3rd-party api.
+The goal of building this app was to learn more about connecting to a 3rd-party API.
 
 ## Built With
 
@@ -17,6 +17,7 @@ The goal of building this app was to learn more about connecting to a 3rd-party 
 * [postgreSQL](https://www.postgresql.org/) - was the database used
 * [bcrypt](https://rubygems.org/gems/bcrypt/versions/3.1.12) - to hash user passwords for real auth
 * [JSON Web Token (JWT)](https://rubygems.org/gems/jwt/versions/1.5.4) - providing security for stored user login data
+* [The Movie Database API](https://developers.themoviedb.org/3/getting-started/introduction)
 
 
 
