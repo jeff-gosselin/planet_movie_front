@@ -1,68 +1,24 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<h1>Movie Seen (aka Planet Movie)</h1>
 
-## Available Scripts
+A web application that not only supplies the user with info on blockbuster movies, but also keeps track of movies the user has seen, movies the user is interested in seeing, and movies the user never wants to see!
 
-In the project directory, you can run:
+[Demo Video](https://drive.google.com/drive/folders/1wl64F9HkieIqIkq1X_AIUDWe99847VYY)
 
-### `npm start`
+## Purpose
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+The goal of building this app was to learn more about connecting to a 3rd-party API.
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+## Built With
 
-### `npm test`
+* [React](https://reactjs.org/) - a javascript library used for the frontend development
+* [react-router](https://reacttraining.com/react-router/) - for navigating the site.
+* [react-icons](https://www.npmjs.com/package/react-icons) - for an icon or two
+* [Ruby on Rails](https://rubyonrails.org/) - used for the backend (version 5.2.2)
+* [postgreSQL](https://www.postgresql.org/) - was the database used
+* [bcrypt](https://rubygems.org/gems/bcrypt/versions/3.1.12) - to hash user passwords for real auth
+* [JSON Web Token (JWT)](https://rubygems.org/gems/jwt/versions/1.5.4) - providing security for stored user login data
+* [The Movie Database API](https://developers.themoviedb.org/3/getting-started/introduction) - An API for movie data
+* [themoviedb-api](https://github.com/18Months/themoviedb-api) - provides a simple and intuitive interface for the Movie Database API making use of OpenStruct.
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+[Backend repo](https://github.com/jeff-gosselin/planet_movie_back)
